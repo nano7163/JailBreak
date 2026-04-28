@@ -3,10 +3,11 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.IO;
 
-public class GeminiService : MonoBehaviour
+public class AIManager : MonoBehaviour
 {
-    [SerializeField] private string apiKey = "AIzaSyBnm86AOcye-APp6P6-R63qKMf_Gv-Y2Ds";
+    private string apiKey;
     private string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
     // 1. 요청 데이터를 위한 구조체
@@ -34,6 +35,21 @@ public class GeminiService : MonoBehaviour
         public Content content;
     }
 
+    private void Awake()
+    {
+        // 파일에서 키를 읽어옵니다.
+        string path = Application.streamingAssetsPath + "/apikey.txt";
+        if (File.Exists(path))
+        {
+            apiKey = File.ReadAllText(path).Trim();
+            Debug.Log("API 키 읽기 성공.");
+
+        }
+        else
+        {
+            Debug.LogError("API 키 파일이 없습니다! 파일을 생성하세요.");
+        }
+    }
     // 3. API 호출 메소드
     public void SendRequest(string prompt) {
         StartCoroutine(PostRequest(prompt));
@@ -78,8 +94,7 @@ public class GeminiService : MonoBehaviour
                 }
             } else {
                 Debug.LogError("오류 발생: " + request.error + "\n응답 내용: " + request.downloadHandler.text);
-            }
-            
+            }            
         }
     }
 }
