@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 
-public class AIManager : MonoBehaviour
+public class Gemini : MonoBehaviour
 {
     private string apiKey;
     private string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";

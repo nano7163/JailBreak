@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b651e0d665bde7d4487da46b29c4d788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AIManager: {fileID: 2058609775}
+  gemini: {fileID: 2030996149}
 --- !u!4 &988046150
 Transform:
   m_ObjectHideFlags: 0
@@ -335,7 +335,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2058609774
+--- !u!1 &2030996148
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,38 +343,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2058609776}
-  - component: {fileID: 2058609775}
+  - component: {fileID: 2030996150}
+  - component: {fileID: 2030996149}
   m_Layer: 0
-  m_Name: AIManager
+  m_Name: Gemini
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2058609775
+--- !u!114 &2030996149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058609774}
+  m_GameObject: {fileID: 2030996148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a32c838b7d0385e42b5dd644a421750a, type: 3}
+  m_Script: {fileID: 11500000, guid: faa01d7d6fa586440b56af6d31bab982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  apiKey: 
---- !u!4 &2058609776
+--- !u!4 &2030996150
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058609774}
+  m_GameObject: {fileID: 2030996148}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4619286, y: -0.466773, z: 0.02280895}
+  m_LocalPosition: {x: 0.14692606, y: -0.14564788, z: 0.040001143}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -386,5 +385,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1147013928}
   - {fileID: 1356538168}
-  - {fileID: 2058609776}
   - {fileID: 988046150}
+  - {fileID: 2030996150}
