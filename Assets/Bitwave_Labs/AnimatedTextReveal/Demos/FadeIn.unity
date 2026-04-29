@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 197187050}
   - component: {fileID: 197187053}
   - component: {fileID: 197187052}
+  - component: {fileID: 197187054}
   - component: {fileID: 197187051}
   m_Layer: 5
   m_Name: InputField (TMP)
@@ -355,7 +356,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 197187054}
+        m_TargetAssemblyTypeName: InputSubmitManager, Assembly-CSharp
+        m_MethodName: OnInputEndEdit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -433,6 +446,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197187049}
   m_CullTransparentMesh: 1
+--- !u!114 &197187054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197187049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c13f984497ea24db5603b0c33e4886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 163479522}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,7 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 466546157}
-  fadeSpeed: 100
+  fadeSpeed: 80
   characterSpread: 10
 --- !u!1 &494955823
 GameObject:
@@ -1198,7 +1224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter text...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1358,9 +1384,9 @@ MonoBehaviour:
   animatedTextReveal: {fileID: 466546159}
   continueIndicator: {fileID: 1170344239}
   lines:
-  - 1232142141
-  - "adas\u3147\u3141\u3134\u3147\u3134\u3141\u3147\u3134\u3141\u3147"
-  - "\u3141\u3134\u3147\u3139\uD638\u3153\u314F\u3157\u314E\u3139\u3147\u3134\u3140"
+  - 123214214112321421411232142141123214214112321421411232142141123214214112321421411232142141123214214112321421411232142141
+  - 1232142141123214214112321421411232142141123214214112321421411232142141123214214112321421411232142141
+  - 123214214112321421411232142141123214214112321421411232142141123214214112321421411232142141123214214112321421411232142141
   fadeMode: 0
   fadeLastLine: 1
   textBar: {fileID: 466546155}

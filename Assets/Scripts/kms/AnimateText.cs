@@ -12,13 +12,15 @@ namespace BitWave_Labs.AnimatedTextReveal
 
         [SerializeField] private AnimatedTextReveal animatedTextReveal;
         [SerializeField] private GameObject continueIndicator;
-        [SerializeField] private List<string> lines;
+        public List<string> lines;
         [SerializeField] private FadeMode fadeMode;
         [SerializeField] private bool fadeLastLine;
 
         private int _currentLineIndex = 0;
         private bool _isLineVisible = false;
         private bool _isAnimating = false;
+        private bool if1alreadyStartCouroutine = false;
+
         [SerializeField] GameObject textBar;
         [SerializeField] GameObject ButtonEndConversation;
         /* private void Start()
@@ -27,6 +29,7 @@ namespace BitWave_Labs.AnimatedTextReveal
         } */
         void OnEnable()
         {
+            if1alreadyStartCouroutine = false;
             ButtonEndConversation.SetActive(false);
             if (continueIndicator != null) continueIndicator.SetActive(false);
             _currentLineIndex = 0;
@@ -47,15 +50,32 @@ namespace BitWave_Labs.AnimatedTextReveal
         }
         private void InputSpace()
         {
-            if (_currentLineIndex + 1 < lines.Count)// +1 해야 일치됨.
+            if (lines.Count == 1)
             {
-                StartCoroutine(HandleTextStep());
+                if (if1alreadyStartCouroutine)
+                {
+                    textBar.SetActive(false);
+                    ButtonEndConversation.SetActive(true);
+                    this.gameObject.SetActive(false);
+                }
+                else if (_currentLineIndex == 0)
+                {
+                    StartCoroutine(HandleTextStep());
+                    if1alreadyStartCouroutine = true;
+                }
             }
             else
             {
-                textBar.SetActive(false);
-                ButtonEndConversation.SetActive(true);
-                this.gameObject.SetActive(false);
+                if (_currentLineIndex + 1 < lines.Count)// +1 해야 일치됨.
+                {
+                    StartCoroutine(HandleTextStep());
+                }
+                else
+                {
+                    textBar.SetActive(false);
+                    ButtonEndConversation.SetActive(true);
+                    this.gameObject.SetActive(false);
+                }
             }
         }
         private IEnumerator HandleTextStep()
