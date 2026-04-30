@@ -3,6 +3,7 @@ using UnityEngine;
 public class Move : MonoBehaviour {
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
+    private Animator anim;
     private Vector2 moveDirection;
     private float lastWTime = -1f;
     private float lastATime = -1f;
@@ -11,6 +12,7 @@ public class Move : MonoBehaviour {
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();    
     }
 
     void Update() {
@@ -57,18 +59,37 @@ public class Move : MonoBehaviour {
         if (Input.GetKey(KeyCode.W) && lastWTime > newestTime) {
             newestTime = lastWTime;
             moveDirection = Vector2.up;
+            if(anim.GetInteger("dir") != 1) {
+                anim.SetInteger("dir", 1);
+                anim.SetTrigger("isChange");
+            }
         }
-        if (Input.GetKey(KeyCode.S) && lastSTime > newestTime) {
+        else if (Input.GetKey(KeyCode.S) && lastSTime > newestTime) {
             newestTime = lastSTime;
             moveDirection = Vector2.down;
+            if(anim.GetInteger("dir") != 3) {
+                anim.SetInteger("dir", 3);
+                anim.SetTrigger("isChange");
+            }
         }
-        if (Input.GetKey(KeyCode.A) && lastATime > newestTime) {
+        else if (Input.GetKey(KeyCode.A) && lastATime > newestTime) {
             newestTime = lastATime;
             moveDirection = Vector2.left;
+            if(anim.GetInteger("dir") != 2) {
+                anim.SetInteger("dir", 2);
+                anim.SetTrigger("isChange");
+            }
         }
-        if (Input.GetKey(KeyCode.D) && lastDTime > newestTime) {
+        else if (Input.GetKey(KeyCode.D) && lastDTime > newestTime) {
             newestTime = lastDTime;
             moveDirection = Vector2.right;
+            if(anim.GetInteger("dir") != 4) {
+                anim.SetInteger("dir", 4);
+                anim.SetTrigger("isChange");
+            }
+        }
+        else {
+            anim.SetInteger("dir", 0);
         }
     }
 
