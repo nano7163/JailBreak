@@ -10,6 +10,7 @@ public class InputSubmitManager : MonoBehaviour
     private TMP_InputField inputField;
     // 연타로 인한 버그 방지를 위한 플래그
     private bool _isProcessing = false;
+    [SerializeField] private GameObject ButtonEndConversation;
 
     // 인스펙터에서 이 메서드를 OnEndEdit 이벤트에 연결하세요 (Dynamic string)
     void Awake()
@@ -26,6 +27,7 @@ public class InputSubmitManager : MonoBehaviour
 
         // 3. 코루틴 시작
         StartCoroutine(ProcessSubmit(text.text));
+        ButtonEndConversation.SetActive(false);
     }
 
     private IEnumerator ProcessSubmit(string processedText)
@@ -41,6 +43,7 @@ public class InputSubmitManager : MonoBehaviour
         // 로그 출력 (전달받은 text 인자를 사용합니다)
         
         Debug.Log("입력된 값: " + processedText);
+        
         GM.Instance.gemini.SendRequest(processedText);
 
         // 선택 해제

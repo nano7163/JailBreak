@@ -1302,6 +1302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1745949681}
+  ButtonEndConversation: {fileID: 181751377}
 --- !u!114 &1225324127
 MonoBehaviour:
   m_ObjectHideFlags: 0

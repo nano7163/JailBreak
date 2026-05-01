@@ -21,8 +21,8 @@ namespace BitWave_Labs.AnimatedTextReveal
         private bool _isAnimating = false;
         private bool if1alreadyStartCouroutine = false;
 
-        [SerializeField] GameObject textBar;
-        [SerializeField] GameObject ButtonEndConversation;
+        [SerializeField] private GameObject textBar;
+        [SerializeField] private GameObject ButtonEndConversation;
         /* private void Start()
         {
             if (continueIndicator != null) continueIndicator.SetActive(false);
