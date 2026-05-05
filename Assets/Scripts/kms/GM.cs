@@ -1,6 +1,7 @@
 using System;
 using BitWave_Labs.AnimatedTextReveal;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GM : MonoBehaviour
@@ -10,12 +11,8 @@ public class GM : MonoBehaviour
     [SerializeField] public Gemini gemini;
     [SerializeField] public AnimateText animateText;
 
-    public String prompt = @"
-    
-    ";
- 
+    public String prompt;
 
-    
     public List<string> npcInfo = new List<string>
     {
 //1번 npc        
@@ -39,5 +36,19 @@ public class GM : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    } 
+    }
+
+    void Start()
+    {
+        string path = Application.streamingAssetsPath + "/prompt.txt";
+        if (File.Exists(path))
+        {
+            prompt = File.ReadAllText(path).Trim();
+            Debug.Log("prompt 읽기 성공.");
+        }
+        else
+        {
+            Debug.LogError("prompt 파일이 없습니다! 파일을 생성하세요.");
+        }
+    }
 }

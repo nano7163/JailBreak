@@ -44,7 +44,7 @@ public class InputSubmitManager : MonoBehaviour
         
         Debug.Log("입력된 값: " + processedText);
         
-        GM.Instance.gemini.SendRequest(processedText);
+        GM.Instance.gemini.SendRequest(GM.Instance.prompt+processedText);
 
         // 선택 해제
         EventSystem.current.SetSelectedGameObject(null);
