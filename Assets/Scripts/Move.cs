@@ -133,6 +133,42 @@ public class Move : MonoBehaviour {
                 rb.linearVelocity = Vector2.zero; 
             }
         }
+        else if (id == 5) {
+            transform.position = new Vector3(-24f, 16f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 6) {
+            transform.position = new Vector3(-24f, 23.5f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 7) {
+            transform.position = new Vector3(-12f, 16f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 8) {
+            transform.position = new Vector3(-12f, 36.5f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 9) {
+            transform.position = new Vector3(24f, 10.5f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 10) {
+            transform.position = new Vector3(24f, -10f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
