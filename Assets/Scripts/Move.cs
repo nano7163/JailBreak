@@ -54,6 +54,13 @@ public class Move : MonoBehaviour {
         if (!Input.GetKey(KeyCode.D)) {
             lastDTime = -1f;
         }
+
+        if(Input.GetKey(KeyCode.LeftShift)){
+            moveSpeed = 10f;
+        }
+        else{
+            moveSpeed = 5f;
+        }
     }
 
     void UpdateMoveDirection() {
@@ -101,6 +108,7 @@ public class Move : MonoBehaviour {
         rb.linearVelocity = moveDirection * moveSpeed;
     }
 
+    // 상호작용
     void UpdateInteraction() {
         if (currentDoor != null && Input.GetKeyDown(KeyCode.F)) {
             Interact(currentDoor.doorID);
