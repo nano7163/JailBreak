@@ -10,6 +10,8 @@ public class Move : MonoBehaviour {
     private float lastSTime = -1f;
     private float lastDTime = -1f;
 
+    private Door currentDoor;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();    
@@ -18,6 +20,8 @@ public class Move : MonoBehaviour {
     void Update() {
         UpdateInputTimes();
         UpdateMoveDirection();
+
+        UpdateInteraction();
     }
 
     void FixedUpdate() {
@@ -95,5 +99,61 @@ public class Move : MonoBehaviour {
 
     void MovePlayer() {
         rb.linearVelocity = moveDirection * moveSpeed;
+    }
+
+    void UpdateInteraction() {
+        if (currentDoor != null && Input.GetKeyDown(KeyCode.F)) {
+            Interact(currentDoor.doorID);
+        }
+    }
+
+    private void Interact(int id) 
+    {
+        if (id == 1) {
+            transform.position = new Vector3(0f, 10.5f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 2) {
+            transform.position = new Vector3(0f, 3f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 3) {
+            transform.position = new Vector3(-24f, 10.5f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 4) {
+            transform.position = new Vector3(-24f, 3f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        Door door = other.GetComponent<Door>();
+        
+        if (door != null) 
+        {
+            currentDoor = door;
+            Debug.Log(currentDoor.doorID + "번 문 앞에 도착");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        Door door = other.GetComponent<Door>();
+        
+        if (door != null && door == currentDoor) 
+        {
+            Debug.Log(currentDoor.doorID + "번 문에서 멀어짐");
+            currentDoor = null; 
+        }
     }
 }
