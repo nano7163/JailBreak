@@ -169,6 +169,18 @@ public class Move : MonoBehaviour {
                 rb.linearVelocity = Vector2.zero; 
             }
         }
+        else if (id == 11) {
+            transform.position = new Vector3(29.5f, 13f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
+        else if (id == 12) {
+            transform.position = new Vector3(34.5f, 13f, transform.position.z);
+            if (rb != null) {
+                rb.linearVelocity = Vector2.zero; 
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
