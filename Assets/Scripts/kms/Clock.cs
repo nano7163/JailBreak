@@ -8,13 +8,14 @@ public class Clock : MonoBehaviour
     [SerializeField] private Sprite night;
     [SerializeField] private Image dayOrNightImage;
     [SerializeField] private int dayOrNightStatus;
+    [SerializeField] private GameObject black;
     [Header("Time Settings")]
     public float eventInterval = 600f; //600f 10분
     [SerializeField] private float elapsedTime = 0f;
 
     [Header("State")]
     [SerializeField] private bool isPaused = false; // 시간이 멈췄는지 확인하는 변수
-
+    [SerializeField] private GameObject monsterGroup;
     public float Progress => elapsedTime / eventInterval;
 
     void Start()
@@ -22,6 +23,7 @@ public class Clock : MonoBehaviour
         timeBar.value = 0f;
         dayOrNightStatus = 0;
         dayOrNightImage.sprite = day;
+        black.SetActive(false);
     }
     void Update()
     {
@@ -131,11 +133,15 @@ public class Clock : MonoBehaviour
         GM.Instance.TeleportPlayer();
         if (dayOrNightStatus == 0){
             //낮이라면
+            black.SetActive(false);
             GM.Instance.doorLock = false;
+            monsterGroup.SetActive(false);
         }
         else
         {
+            black.SetActive(true);
             //밤인 경우
+            monsterGroup.SetActive(true);
             if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {//복제 열쇠 꾸러미를 가지고 있는 경우
                 GM.Instance.doorLock = false;

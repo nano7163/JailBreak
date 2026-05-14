@@ -16,6 +16,13 @@ public class GM : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private Transform tpPoint;
     public Bag bag;
+    public MoveMonster moveMonster1;
+    public MoveMonster moveMonster2;
+    public Transform centerPoint1;
+    public Transform centerPoint2;
+    public Transform defaultPoint1;
+    public Transform defaultPoint2;
+    public Clock clock;
     public List<string> npcInfo = new List<string>
     {
 //1번 npc        
@@ -58,5 +65,19 @@ public class GM : MonoBehaviour
     public void TeleportPlayer()
     {
         player.transform.position = tpPoint.position;
+    }
+    public void SetMoveMonsterStartDefault()
+    {
+        moveMonster1.transform.position = defaultPoint1.position;
+        moveMonster1.SetLeft();
+        moveMonster2.transform.position = defaultPoint2.position;
+        moveMonster2.SetRight();
+    }
+    public void SetMoveMonsterStartCenter()
+    {
+        moveMonster1.transform.position = centerPoint1.position;
+        moveMonster1.SetLeft();
+        moveMonster2.transform.position = centerPoint2.position;
+        moveMonster2.SetRight();
     }
 }

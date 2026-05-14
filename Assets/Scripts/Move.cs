@@ -148,12 +148,19 @@ public class Move : MonoBehaviour
 
     private void Interact(int id)
     {
-        if (id == 1)
+        if (id == 1)//본인방 나갈때
         {
-            transform.position = new Vector3(0f, 10.5f, transform.position.z);
-            if (rb != null)
+            //밤인 경우 열쇠 있을 때만 혹은 낮의 경우에 나갈 수 있다.
+            if ((GM.Instance.clock.GetDayOrNigjtStatus() == 1
+            && GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
+            || GM.Instance.clock.GetDayOrNigjtStatus() == 0)
             {
-                rb.linearVelocity = Vector2.zero;
+                GM.Instance.SetMoveMonsterStartDefault();
+                transform.position = new Vector3(0f, 10.5f, transform.position.z);
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                }
             }
         }
         else if (id == 2)
@@ -166,6 +173,7 @@ public class Move : MonoBehaviour
         }
         else if (id == 3)
         {
+            GM.Instance.SetMoveMonsterStartCenter();
             transform.position = new Vector3(-24f, 10.5f, transform.position.z);
             if (rb != null)
             {
@@ -174,7 +182,9 @@ public class Move : MonoBehaviour
         }
         else if (id == 4)//특수방
         {
-            if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
+            //밤에만 열쇠 있을 때 들어갈 수 있다.
+            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1 
+            && GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
                 transform.position = new Vector3(-24f, 3f, transform.position.z);
                 if (rb != null)
@@ -185,6 +195,7 @@ public class Move : MonoBehaviour
         }
         else if (id == 5)
         {
+            GM.Instance.SetMoveMonsterStartCenter();
             transform.position = new Vector3(-24f, 16f, transform.position.z);
             if (rb != null)
             {
@@ -193,7 +204,9 @@ public class Move : MonoBehaviour
         }
         else if (id == 6)//특수방
         {
-            if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
+            //밤에만 열쇠 있을 때 들어갈 수 있다.
+            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1 
+            && GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
                 transform.position = new Vector3(-24f, 23.5f, transform.position.z);
                 if (rb != null)
@@ -204,6 +217,7 @@ public class Move : MonoBehaviour
         }
         else if (id == 7)
         {
+            GM.Instance.SetMoveMonsterStartCenter();
             transform.position = new Vector3(-12f, 16f, transform.position.z);
             if (rb != null)
             {
@@ -212,7 +226,8 @@ public class Move : MonoBehaviour
         }
         else if (id == 8)//특수방
         {
-            if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
+            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1 
+            && GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
                 transform.position = new Vector3(-12f, 36.5f, transform.position.z);
                 if (rb != null)
@@ -223,6 +238,7 @@ public class Move : MonoBehaviour
         }
         else if (id == 9)
         {
+            GM.Instance.SetMoveMonsterStartCenter();
             transform.position = new Vector3(24f, 10.5f, transform.position.z);
             if (rb != null)
             {
@@ -239,6 +255,7 @@ public class Move : MonoBehaviour
         }
         else if (id == 11)
         {
+            GM.Instance.SetMoveMonsterStartCenter();
             transform.position = new Vector3(29.5f, 13f, transform.position.z);
             if (rb != null)
             {
