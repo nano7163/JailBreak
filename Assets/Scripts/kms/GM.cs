@@ -8,9 +8,10 @@ public class GM : MonoBehaviour
 {
     public static GM Instance;
 
-    [SerializeField] public Gemini gemini;
-    [SerializeField] public AnimateText animateText;
+    public Gemini gemini;
+    public AnimateText animateText;
 
+    public bool doorLock = false;
     public String prompt;
 
     public List<string> npcInfo = new List<string>
