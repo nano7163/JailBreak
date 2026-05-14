@@ -12,6 +12,8 @@ public class Move : MonoBehaviour
     private float lastDTime = -1f;
 
     private Door currentDoor;
+    [SerializeField] private GameObject npcDetecter;
+    [SerializeField] private GameObject itemDetecter;
 
     void Start()
     {
@@ -25,6 +27,30 @@ public class Move : MonoBehaviour
         UpdateMoveDirection();
 
         UpdateInteraction();
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            npcDetecter.SetActive(true);
+            itemDetecter.SetActive(true);
+            Invoke("DetectersSetActiveFalse", 0.2f);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (GM.Instance.bag.gameObject.activeSelf)
+            {
+                GM.Instance.bag.BagClose();
+            }
+            else
+            {
+                GM.Instance.bag.BagOpen();
+            }
+        }
+    }
+
+    public void DetectersSetActiveFalse()
+    {
+        npcDetecter.SetActive(false);
+        itemDetecter.SetActive(false);
     }
 
     void FixedUpdate()
@@ -183,7 +209,7 @@ public class Move : MonoBehaviour
         else if (id == 4)//특수방
         {
             //밤에만 열쇠 있을 때 들어갈 수 있다.
-            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1 
+            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1
             && GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
                 transform.position = new Vector3(-24f, 3f, transform.position.z);
@@ -205,7 +231,7 @@ public class Move : MonoBehaviour
         else if (id == 6)//특수방
         {
             //밤에만 열쇠 있을 때 들어갈 수 있다.
-            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1 
+            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1
             && GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
                 transform.position = new Vector3(-24f, 23.5f, transform.position.z);
@@ -226,7 +252,7 @@ public class Move : MonoBehaviour
         }
         else if (id == 8)//특수방
         {
-            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1 
+            if (GM.Instance.clock.GetDayOrNigjtStatus() == 1
             && GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
                 transform.position = new Vector3(-12f, 36.5f, transform.position.z);
