@@ -13,7 +13,9 @@ public class GM : MonoBehaviour
 
     public bool doorLock = false;
     public String prompt;
-
+    [SerializeField] private GameObject player;
+    [SerializeField] private Transform tpPoint;
+    public Bag bag;
     public List<string> npcInfo = new List<string>
     {
 //1번 npc        
@@ -51,5 +53,10 @@ public class GM : MonoBehaviour
         {
             Debug.LogError("prompt 파일이 없습니다! 파일을 생성하세요.");
         }
+    }
+
+    public void TeleportPlayer()
+    {
+        player.transform.position = tpPoint.position;
     }
 }

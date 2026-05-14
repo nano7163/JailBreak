@@ -172,12 +172,15 @@ public class Move : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
             }
         }
-        else if (id == 4)
+        else if (id == 4)//특수방
         {
-            transform.position = new Vector3(-24f, 3f, transform.position.z);
-            if (rb != null)
+            if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
-                rb.linearVelocity = Vector2.zero;
+                transform.position = new Vector3(-24f, 3f, transform.position.z);
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                }
             }
         }
         else if (id == 5)
@@ -188,12 +191,15 @@ public class Move : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
             }
         }
-        else if (id == 6)
+        else if (id == 6)//특수방
         {
-            transform.position = new Vector3(-24f, 23.5f, transform.position.z);
-            if (rb != null)
+            if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
-                rb.linearVelocity = Vector2.zero;
+                transform.position = new Vector3(-24f, 23.5f, transform.position.z);
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                }
             }
         }
         else if (id == 7)
@@ -204,12 +210,15 @@ public class Move : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
             }
         }
-        else if (id == 8)
+        else if (id == 8)//특수방
         {
-            transform.position = new Vector3(-12f, 36.5f, transform.position.z);
-            if (rb != null)
+            if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
             {
-                rb.linearVelocity = Vector2.zero;
+                transform.position = new Vector3(-12f, 36.5f, transform.position.z);
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.zero;
+                }
             }
         }
         else if (id == 9)

@@ -128,5 +128,22 @@ public class Clock : MonoBehaviour
         ResetClock();
         ChangeCycle();
         SetDayOrNight(dayOrNightStatus);
+        GM.Instance.TeleportPlayer();
+        if (dayOrNightStatus == 0){
+            //낮이라면
+            GM.Instance.doorLock = false;
+        }
+        else
+        {
+            //밤인 경우
+            if (GM.Instance.bag.items[5].GetComponent<Items>().GetIsItemAcquired())
+            {//복제 열쇠 꾸러미를 가지고 있는 경우
+                GM.Instance.doorLock = false;
+            }
+            else
+            {
+                GM.Instance.doorLock = true;
+            }
+        }
     }
 }
