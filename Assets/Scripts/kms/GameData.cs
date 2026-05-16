@@ -22,5 +22,6 @@ public class GameData
     public bool gameCode016 = false;
     public bool gameCode017 = false;
     public bool gameCode018 = false;
+    public bool gameCode019 = false;
     public List<string> dialogueHistory = new List<string>();
 }

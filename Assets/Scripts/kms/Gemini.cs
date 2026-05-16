@@ -5,63 +5,56 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 using System;
-using System.Collections.Generic;
 
-public class Gemini : MonoBehaviour
+public class Gemini : MonoBehaviour // 클래스 이름은 유니티 연동을 위해 기존 그대로 유지합니다.
 {
     private string apiKey;
-    private string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+    // Groq 표준 엔드포인트 주소로 변경
+    private string url = "https://api.groq.com/openai/v1/chat/completions";
 
-    // 1. 요청 데이터를 위한 구조체
-    [System.Serializable]
-    public class GeminiRequest
+    // 1. Groq(OpenAI 표준) 요청 데이터를 위한 구조체로 변경
+    public class GroqRequest
     {
-        public List<Content> contents;
+        public string model { get; set; }
+        public List<GroqMessage> messages { get; set; }
     }
 
-    [System.Serializable]
-    public class Content
+    public class GroqMessage
     {
-        public List<Part> parts;
+        public string role { get; set; }
+        public string content { get; set; }
     }
 
-    [System.Serializable]
-    public class Part
+    // 2. Groq 응답 데이터를 받기 위한 구조체로 변경
+    public class GroqResponse
     {
-        public string text;
+        public List<Choice> choices { get; set; }
     }
 
-    // 2. 응답 데이터를 받기 위한 구조체
-    public class GeminiResponse
+    public class Choice
     {
-        public List<Candidate> candidates;
-    }
-
-    public class Candidate
-    {
-        public Content content;
+        public GroqMessage message { get; set; }
     }
 
     private void Awake()
     {
-        // 파일에서 키를 읽어옵니다.
+        // Awake에서 주소를 Groq 주소로 고정합니다.
+        url = "https://api.groq.com/openai/v1/chat/completions";
+        
+        // 파일에서 키를 읽어오는 기존 로직 그대로 유지 (StreamingAssets/apikey.txt 안에 Groq 키를 넣으시면 됩니다)
         string path = Application.streamingAssetsPath + "/apikey.txt";
         if (File.Exists(path))
         {
             apiKey = File.ReadAllText(path).Trim();
-            Debug.Log("API 키 읽기 성공.");
-
+            Debug.Log("Groq API 키 읽기 성공.");
         }
         else
         {
             Debug.LogError("API 키 파일이 없습니다! 파일을 생성하세요.");
         }
     }
-/*     void Start()
-    {
-        SendRequest("서버가 감자서버여 왜이렇게 응답을 못해");
-    } */
-    // 3. API 호출 메소드
+
+    // 3. 기존 API 호출 메소드 그대로 유지
     public void SendRequest(string prompt)
     {
         StartCoroutine(PostRequest(prompt));
@@ -69,53 +62,61 @@ public class Gemini : MonoBehaviour
 
     private IEnumerator PostRequest(string prompt)
     {
-        // 데이터 구성
-        var requestData = new GeminiRequest
+        // Groq 규격에 맞게 데이터 재구성
+        var requestData = new GroqRequest
         {
-            contents = new List<Content> {
-                new Content { parts = new List<Part> { new Part { text = prompt } } }
+            //model = "llama-3.3-70b-versatile", // 추천하는 무료 고성능 모델 (혹은 "llama-3.1-8b-instant")
+            model = "openai/gpt-oss-120b",
+            messages = new List<GroqMessage> {
+                new GroqMessage { role = "user", content = prompt }
             }
         };
 
         string jsonBody = JsonConvert.SerializeObject(requestData);
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonBody);
 
-        // 요청 전송
-        string fullUrl = $"{url}?key={apiKey}";
-        using (UnityWebRequest request = new UnityWebRequest(fullUrl, "POST"))
+        // [변경 포인트] Groq는 URL 뒤에 키를 붙이지 않고, 헤더(Header)에 보냅니다.
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
+            
+            // 필수 헤더 설정
             request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("Authorization", "Bearer " + apiKey); // 인증 헤더 추가
 
             yield return request.SendWebRequest();
+            
             if (request.result == UnityWebRequest.Result.Success)
             {
                 string responseJson = request.downloadHandler.text;
-                GeminiResponse response = JsonConvert.DeserializeObject<GeminiResponse>(responseJson);
+                // Groq 응답 구조로 디serialize
+                GroqResponse response = JsonConvert.DeserializeObject<GroqResponse>(responseJson);
 
-                // 1. 응답 구조가 비어있는지 체크
-                if (response != null && response.candidates != null && response.candidates.Count > 0)
+                // 기존 체크 로직과 동일하게 Groq 구조 검사
+                if (response != null && response.choices != null && response.choices.Count > 0)
                 {
-                    var candidate = response.candidates[0];
+                    var choice = response.choices[0];
 
-                    // 2. 내용(Content)과 부분(Parts)이 있는지 체크
-                    if (candidate.content != null && candidate.content.parts != null && candidate.content.parts.Count > 0)
+                    if (choice.message != null && !string.IsNullOrEmpty(choice.message.content))
                     {
-                        string answer = candidate.content.parts[0].text;
-                        Debug.Log("Gemini 응답: " + answer);
+                        // 텍스트 추출 완료
+                        string answer = choice.message.content;
+                        Debug.Log("Groq 응답: " + answer);
+                        
+                        // 기존에 만들어두신 인게임 매니저 연동 로직 100% 동일하게 유지
                         GM.Instance.animateText.lines = ConvertStringToList(answer);
                         GM.Instance.inputSubmitManager.gameCode = GM.Instance.animateText.lines[^1];
                         GM.Instance.animateText.gameObject.SetActive(true);
                     }
                     else
                     {
-                        Debug.LogWarning("응답은 왔으나 내용이 없습니다. (필터링 확인)");
+                        Debug.LogWarning("응답은 왔으나 내용이 없습니다.");
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("Gemini로부터 후보군을 찾을 수 없습니다.");
+                    Debug.LogWarning("Groq로부터 답변을 찾을 수 없습니다.");
                 }
             }
             else
@@ -135,10 +136,9 @@ public class Gemini : MonoBehaviour
             }
         }
     }
+
     public List<string> ConvertStringToList(string answer)
     {
-        // \n뿐만 아니라 \r\n(윈도우 스타일 줄바꿈)도 함께 처리하는 것이 안전합니다.
-        // StringSplitOptions.RemoveEmptyEntries를 넣으면 빈 줄(공백)은 리스트에서 제외됩니다.
         return new List<string>(answer.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries));
     }
 }

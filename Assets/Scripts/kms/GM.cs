@@ -28,16 +28,6 @@ public class GM : MonoBehaviour
     public InputSubmitManager inputSubmitManager;
     public MyDiary myDiary;
     public GameData gameData;
-    public List<string> npcInfo = new List<string>
-    {
-//1번 npc        
-    @"
-    ",
-//2번 npc
-    @""
-
-    };
-
     private void Awake()
     {
         // 싱글톤 초기화

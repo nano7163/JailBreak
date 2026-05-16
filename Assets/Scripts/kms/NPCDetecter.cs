@@ -62,18 +62,18 @@ public class NPCDetecter : MonoBehaviour
         }
         else if (collision.name == "Detective")
         {
-            if (!GM.Instance.gameData.gameCode003)
+            if (!GM.Instance.gameData.gameCode004)
             {
                 Debug.Log("탐정 의뢰 착수 전");
                 GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
 *   **이름**: 사설 탐정
 *   **성격**: 지적이고 자존감 높음. 전문적임. 흥미 돋는 사건을 쫓는걸 좋아함. 흥미가 없어도 돈을 많이 주면 의뢰를 착수함. 
 *   **현재 상태**: 전화로 플레이어와 대화하고 있는 상태. 거액의 돈을 송금하지 않으면 의뢰를 맡을 생각 없음.
-*   **단서 제공 조건**: 의뢰를 맡기고 싶다고 할 때, 거액의 송금을 요구한다. 게임 코드는 '004'을 제공함.
+*   **단서 제공 조건**: 의뢰를 맡기고 싶다고 할 때, 탐정은 플레이어에게 거액의 송금을 조건으로 요구한다. 이때 게임 코드는 '004'를 반드시 제공함.
 *   **단서 게임 코드**: 004";
                 AIinteracterSetActiveTrue();
             }
-            else if (!GM.Instance.gameData.gameCode004)
+            else if (!GM.Instance.gameData.gameCode006)
             {
                 Debug.Log("탐정 송금 요구 중일 때");
                 GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
@@ -84,18 +84,18 @@ public class NPCDetecter : MonoBehaviour
 *   **단서 게임 코드**: 000";
                 AIinteracterSetActiveTrue();
             }
-            else if (GM.Instance.gameData.gameCode004 && !GM.Instance.gameData.gameCode007)
+            else if (!GM.Instance.gameData.gameCode007)
             {//송금 받음. 의뢰 착수, 며칠 기다리기 전
                 Debug.Log("탐정 의뢰 착수 며칠 기다리라 함");
                 GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
 *   **이름**: 사설 탐정
 *   **성격**: 지적이고 자존감 높음. 전문적임. 흥미 돋는 사건을 쫓는걸 좋아함. 흥미가 없어도 돈을 많이 주면 의뢰를 착수함. 
 *   **현재 상태**: 전화로 플레이어와 대화하고 있는 상태. 거액의 돈을 송금받아 기뻐하며 의뢰를 받아줌. 
-*   **단서 제공 조건**: 조사를 위해 며칠 기다리라고 요구함. 게임 코드는 '000'만을 제공함.
-*   **단서 게임 코드**: 000";
+*   **단서 제공 조건**: 조사를 위해 며칠 기다리라고 요구함. 게임 코드는 '007'만을 제공함.
+*   **단서 게임 코드**: 007";
                 AIinteracterSetActiveTrue();
             }
-            else if (GM.Instance.gameData.gameCode007)
+            else if (GM.Instance.gameData.gameCode019&&!GM.Instance.gameData.gameCode017)
             {// 며칠 기다렸음. 
                 Debug.Log("탐정 의뢰 착수 후 며칠 지났음");
                 GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
@@ -106,8 +106,19 @@ public class NPCDetecter : MonoBehaviour
 *   **단서 게임 코드**: 008";
                 AIinteracterSetActiveTrue();
             }
+            else if (GM.Instance.gameData.gameCode017)
+            {
+                Debug.Log("최중요 단서 전달");
+                GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
+*   **이름**: 사설 탐정
+*   **성격**: 지적이고 자존감 높음. 전문적임. 흥미 돋는 사건을 쫓는걸 좋아함. 흥미가 없어도 돈을 많이 주면 의뢰를 착수함. 
+*   **현재 상태**: 전화로 플레이어와 대화하고 있는 상태. 플레이어의 의뢰는 해결 불가능에 가깝다고 단정내린 상태. 하지만 핵심적인 단서가 나타나면 의뢰를 계속 진행할 수 있다.
+*   **단서 제공 조건**: 교도소장의 일기장의 내용(빅데이터 상으로 미리 범죄자가 될 가능성이 높은 사람을 추려 기억을 지우고 누명을 씌워 미리 가두는 국가단위 프로젝트)을 말해주면, 브로커를 보낼 테니 그 교도소장의 일기장을 확보해 전달하라는 미션을 준다. 게임코드는 '018'을 제공함.
+*   **단서 게임 코드**: 018";
+                AIinteracterSetActiveTrue();
+            }
         }
-        else if (collision.name == "Toss")
+        else if (collision.name == "Toss")  
         {
             if (!GM.Instance.gameData.gameCode006)
             {
@@ -135,7 +146,7 @@ public class NPCDetecter : MonoBehaviour
         }
         else if (collision.name == "KeyMan")
         {
-            if (!GM.Instance.gameData.gameCode011)
+            if (!GM.Instance.gameData.gameCode010)
             {
                 Debug.Log("열쇠공, 비상금 없어져서 화난 상태");
                 GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
@@ -145,6 +156,15 @@ public class NPCDetecter : MonoBehaviour
 *   **단서 제공 조건**: 플레이어가 '열쇠공'의 탈출 계획이 좋은 생각이라고 함께하고 싶다고 했을 때, '찰흙'을 건네준다. 이걸로 교도관의 허리춤에 있는 열쇠를 본떠오라고 시킨다.
 *   **단서 게임 코드**: 010";
                 AIinteracterSetActiveTrue();
+            }else if (!GM.Instance.gameData.gameCode011)
+            {
+                Debug.Log("열쇠공 000");
+                GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
+*   **이름**: 동료 수감수, 별명 '열쇠공'
+*   **성격**: 자신이 바라는 미래를 망상하는걸 좋아한다. 터무니 없는 것을 많이 시도하려고 한다. 
+*   **현재 상태**: 나무토막으로 열쇠를 만들어 탈출할 계획을 세우고 있었다. 플레이어에게 교도관이 가진 열쇠를 찰흙으로 본뜨도록 시켰다. 성공하길 기대중이다.
+*   **단서 제공 조건**: 게임 코드 '000'만을 제공함.
+*   **단서 게임 코드**: 000";
             }
             else if (!GM.Instance.gameData.gameCode012)
             {//본뜬 상태일때
@@ -153,7 +173,7 @@ public class NPCDetecter : MonoBehaviour
 *   **이름**: 동료 수감수, 별명 '열쇠공'
 *   **성격**: 자신이 바라는 미래를 망상하는걸 좋아한다. 터무니 없는 것을 많이 시도하려고 한다. 
 *   **현재 상태**: 나무토막으로 열쇠를 만들어 탈출할 계획을 세우고 있었다. 플레이어가 열쇠들을 본떠오는데 성공하여 기뻐한다. 비상금이 사라진 일 때문에 최근 기분이 안좋았는데 이제 좀 괜찮아졌다.
-*   **단서 제공 조건**: '열쇠공'이 자신의 감정 변화를 서술한다. '찰흙'을 토대로 열쇠를 제작해준다. '복제된 열쇠꾸러미'를 제공해준다. 다만 정작 중요한 출입구 열쇠는 없어서 '열쇠공'의 계획을 실패한 셈이라 아쉬워한다.
+*   **단서 제공 조건**: '열쇠공'이 자신의 감정 변화를 서술한다. '찰흙'을 토대로 열쇠를 제작해준다. '복제된 열쇠꾸러미'를 제공해준다. 다만 정작 중요한 출입구 열쇠는 없어서 '열쇠공'의 계획을 실패한 셈이라 아쉬워한다.열쇠를 제공해주면 게임 코드 '012'를 제공함.
 *   **단서 게임 코드**: 012";
                 AIinteracterSetActiveTrue();
             }
@@ -165,6 +185,31 @@ public class NPCDetecter : MonoBehaviour
 *   **성격**: 자신이 바라는 미래를 망상하는걸 좋아한다. 터무니 없는 것을 많이 시도하려고 한다. 
 *   **현재 상태**: 나무토막으로 열쇠를 만들어 탈출할 계획을 세우고 있었다. 다만 교도관의 허리춤에 출입구 열쇠는 없어 계획이 실패했다. 그래도 계획을 도와준 플레이어에게 고마워하고 있다.
 *   **단서 제공 조건**: 이미 모든 단서를 제공해주었다. 오직 게임 코드 '000'만을 제공한다.
+*   **단서 게임 코드**: 000";
+                AIinteracterSetActiveTrue();
+            }
+        }
+        else if (collision.name == "Hacker")
+        {
+            if (!GM.Instance.gameData.gameCode014)
+            {
+                Debug.Log("해커");
+                GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
+*   **이름**: 동료 수감수, 별명 '해커'
+*   **성격**: 허풍이 심하다. 본인 능력을 부풀려서 이야기한다.
+*   **현재 상태**: 해킹 실력이 썩 좋진 않지만 기계를 잘 다루는 편에 속한다.
+*   **단서 제공 조건**: 플레이어가 '휴대폰'을 건네며 부탁했을 때 '휴대폰 위치정보'를 분석해준다. 범행 당시의 휴대폰 위치정보기록이 인위적으로 지워져 있다고 말해준다.
+*   **단서 게임 코드**: 014";
+                AIinteracterSetActiveTrue();
+            }
+            else
+            {
+                Debug.Log("해커-컴플리트");
+                GM.Instance.inputSubmitManager.nPCInfomation = @"### [NPC 정보]
+*   **이름**: 동료 수감수, 별명 '해커'
+*   **성격**: 허풍이 심하다. 본인 능력을 부풀려서 이야기한다.
+*   **현재 상태**: 해킹 실력이 썩 좋진 않지만 기계를 잘 다루는 편에 속한다.
+*   **단서 제공 조건**: 이미 단서를 제공해줬다. 게임 코드 '000'만을 제공한다.
 *   **단서 게임 코드**: 000";
                 AIinteracterSetActiveTrue();
             }

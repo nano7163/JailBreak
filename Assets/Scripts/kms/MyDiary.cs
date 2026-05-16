@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using BitWave_Labs.AnimatedTextReveal;
+using NUnit.Framework.Constraints;
 
 public class MyDiary : MonoBehaviour
 {
@@ -38,7 +39,10 @@ public class MyDiary : MonoBehaviour
 //4
 "7쪽: 조작된 cctv, 누가? 왜 나를",
 //5
-"9쪽: 마지막 장. 모든 여정은 여기서 끝을 맺습니다."
+"9쪽: 휴대폰 위치정보를 누가 인위적으로 지웠다. 의심은 커져간다.",
+//6
+"11쪽: 교도소장의 일기장 내용은 충격적이었다. 나는 살인범이 아니었다."
+
         };
 
         rightPageContents = new List<string>()
@@ -56,7 +60,9 @@ public class MyDiary : MonoBehaviour
 영치품 창고에 있는 나의 휴대폰을 확보해보는건 어떨까.
 위험한 생각이지만 떠오르는 방법이 이거밖에 없어.",
 //5
-"10쪽: 에필로그. 새로운 전설이 시작될 준비를 마쳤습니다."
+"10쪽: .",
+//6
+"12쪽: 그 일기장을 챙기고 싶었으나 그런 중요한 물건이 사라지면 들킬지도 모른다. 일단 탐정에게 상담해보자"
         };
     }
     void OnEnable()
@@ -121,11 +127,23 @@ public class MyDiary : MonoBehaviour
         }
         else if (allowedPage == 3)
         {
-            GM.Instance.gameData.gameCode007 = true;
+            GM.Instance.gameData.gameCode019 = true;
         }
         else if (allowedPage == 4)
         {
-            GM.Instance.gameData.gameCode009 = true;
+            GM.Instance.inputSubmitManager.gameCode = "009";// cctv 단서 회득 직후 열쇠공 활성화
+            GM.Instance.inputSubmitManager.ProgressByGameCode();
+        }
+        else if (allowedPage == 5)
+        {
+            //            GM.Instance.gameData.gameCode015 = true;
+            //교도소장실 일기장 활성화가 아래에서 이루어진다.
+            GM.Instance.inputSubmitManager.gameCode = "015";
+            GM.Instance.inputSubmitManager.ProgressByGameCode();
+        }
+        else if (allowedPage == 6)
+        {
+            GM.Instance.gameData.gameCode017 = true;
         }
         Debug.Log("쓰기 실행");
         leftText.text = "";

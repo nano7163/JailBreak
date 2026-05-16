@@ -17,7 +17,7 @@ public class ItemDetecter : MonoBehaviour
         if (collision.name == "11")
         {
             JustTextPrint("숟가락을 얻었다.");
-
+            GM.Instance.notice.SetActiveNotice(true);
             collision.gameObject.SetActive(false);
             GM.Instance.bag.items[11 - 1].GetComponent<Items>().SetIsItemAcquired(true);
         }
@@ -36,10 +36,11 @@ public class ItemDetecter : MonoBehaviour
         }
         else if (collision.name == "Money")
         {
-            GM.Instance.gameData.gameCode005 = true;
+            GM.Instance.inputSubmitManager.gameCode = "005";
+            GM.Instance.inputSubmitManager.ProgressByGameCode();
             JustTextPrint("벽 틈에 돈이 들어있다!?");
+            GM.Instance.notice.SetActiveNotice(true);
             collision.gameObject.SetActive(false);
-            GM.Instance.bag.items[3 - 1].GetComponent<Items>().SetIsItemAcquired(true);
         }
         else if (collision.name == "Telephone")
         {
@@ -47,15 +48,20 @@ public class ItemDetecter : MonoBehaviour
             {
                 JustTextPrint("휴대폰을 찾았다.");
                 collision.gameObject.SetActive(false);
-                GM.Instance.bag.items[7 - 1].GetComponent<Items>().SetIsItemAcquired(true);
-                GM.Instance.gameData.gameCode013 = true;
-                //해커 활성화
-
-                //
+                GM.Instance.notice.SetActiveNotice(true);
+                GM.Instance.inputSubmitManager.gameCode = "013";
+                GM.Instance.inputSubmitManager.ProgressByGameCode();
             }
         }
         else if (collision.name == "Book")
         {
+            if (!GM.Instance.gameData.gameCode016)
+            {
+                GM.Instance.gameData.gameCode016 = true;
+                GM.Instance.notice.SetActiveNotice(true);
+                GM.Instance.bag.items[9 - 1].GetComponent<Items>().SetIsItemAcquired(true);
+                GM.Instance.myDiary.SetIntAllowedPage(6);
+            }
             GM.Instance.clock.PauseClock();
             book.SetActive(true);
             GM.Instance.playerMove.enabled = false;

@@ -18,7 +18,7 @@ public class Clock : MonoBehaviour
     [SerializeField] private bool isPaused = false; // 시간이 멈췄는지 확인하는 변수
     [SerializeField] private GameObject monsterGroup;
     public float Progress => elapsedTime / eventInterval;
-
+    [SerializeField] private Collider2D nightDoor;
     void Start()
     {
         timeBar.value = 0f;
@@ -103,10 +103,12 @@ public class Clock : MonoBehaviour
         if (don == 1)
         {
             dayOrNightImage.sprite = night;
+            nightDoor.enabled = false;
         }
         else if (don == 0)
         {
             dayOrNightImage.sprite = day;
+            nightDoor.enabled = true;
         }
         else
         {
