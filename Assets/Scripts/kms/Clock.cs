@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Clock : MonoBehaviour
 {
+    [SerializeField] private Button skipBtn;
     [SerializeField] private Slider timeBar;
     [SerializeField] private Sprite day;
     [SerializeField] private Sprite night;
@@ -50,8 +51,9 @@ public class Clock : MonoBehaviour
     /// </summary>
     public void PauseClock()
     {
+        skipBtn.interactable = false;
         isPaused = true;
-        Debug.Log("시계가 정지되었습니다.");
+        Debug.Log("시계가 정지되었습니다.");   
     }
 
     /// <summary>
@@ -59,6 +61,7 @@ public class Clock : MonoBehaviour
     /// </summary>
     public void ResumeClock()
     {
+        skipBtn.interactable = true;
         isPaused = false;
         Debug.Log("시계가 다시 흐릅니다.");
     }

@@ -28,21 +28,29 @@ public class Move : MonoBehaviour
 
         UpdateInteraction();
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!Input.GetKey(KeyCode.W) &&
+                !Input.GetKey(KeyCode.A) &&
+                !Input.GetKey(KeyCode.S) &&
+                !Input.GetKey(KeyCode.D))
         {
-            npcDetecter.SetActive(true);
-            itemDetecter.SetActive(true);
-            Invoke("DetectersSetActiveFalse", 0.2f);
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (GM.Instance.bag.gameObject.activeSelf)
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                GM.Instance.bag.BagClose();
+                npcDetecter.SetActive(true);
+                itemDetecter.SetActive(true);
+                Invoke("DetectersSetActiveFalse", 0.2f);
             }
-            else
+            if (Input.GetKeyDown(KeyCode.B))
             {
-                GM.Instance.bag.BagOpen();
+                if (GM.Instance.bag.gameObject.activeSelf)
+                {
+                    GM.Instance.bag.BagClose();
+                }
+                else
+                {
+                    GM.Instance.bag.BagOpen();
+                    GM.Instance.playerMove.enabled = false;
+                    GM.Instance.clock.PauseClock();
+                }
             }
         }
     }

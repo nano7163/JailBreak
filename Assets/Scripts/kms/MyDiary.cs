@@ -30,16 +30,13 @@ public class MyDiary : MonoBehaviour
         leftPageContents = new List<string>()
         {
 //1
-"1쪽: 모험의 시작. 서쪽 마을에서 이야기가 시작됩니다.",
+@"1쪽: 나 살인범. 근데 기억이 안남. 뭔가 억울함. 내가 진짜 살인을 저지른 걸까.",
 //2
-@"3쪽: 숲속 깊은 곳에서 신비한 빛을 발견했습니다.\n
-숲속 깊은 곳에서 신비한 빛을 발견했습니다.\n +
-숲속 깊은 곳에서 신비한 빛을 발견했습니다.\n +
-숲속 깊은 곳에서 신비한 빛을 발견했습니다.",
+@"3쪽: 전설적인 사설 탐정이라, 이 사람이면 내 막막한 상황을 해결해 줄 수 있을지도 몰라.",
 //3
-"5쪽: 고대 유적의 문이 서서히 열리기 시작합니다.",
+"5쪽: 사설탐정을 고용했다. ",
 //4
-"7쪽: 잊혀진 전설에 따르면 영웅은 다시 돌아옵니다.",
+"7쪽: 조작된 cctv, 누가? 왜 나를",
 //5
 "9쪽: 마지막 장. 모든 여정은 여기서 끝을 맺습니다."
         };
@@ -47,13 +44,17 @@ public class MyDiary : MonoBehaviour
         rightPageContents = new List<string>()
         {
 //1
-"2쪽: 마을 사람들은 모두 친절해 보였습니다.",
+"2쪽: ",
 //2
 "4쪽: 그 빛은 사실 오래된 등불의 잔상이었습니다.",
 //3
-"6쪽: 유적 안에는 차가운 공기가 가득했습니다.",
+"6쪽: 기다리라고는 하는데 하루지만 오늘 밤은 잘을 잘 못잘 것 같다. 기대가 크다.",
 //4
-"8쪽: 하늘에서 내려온 빛이 길을 안내합니다.",
+@"8쪽: 억울해. 난 살인범이 아닐지 모른다는 의심이 더욱 강해지고 있다. 진실을 알고 싶다.
+하지만 탐정은 이제 도와줄 것이 없다고 했는데
+내가 다른 단서를 찾는다면 탐정이 조사할 것이 더 생길지 몰라.
+영치품 창고에 있는 나의 휴대폰을 확보해보는건 어떨까.
+위험한 생각이지만 떠오르는 방법이 이거밖에 없어.",
 //5
 "10쪽: 에필로그. 새로운 전설이 시작될 준비를 마쳤습니다."
         };
@@ -114,6 +115,18 @@ public class MyDiary : MonoBehaviour
     }
     public void WritePage()
     {
+        if (allowedPage == 2)
+        {
+            GM.Instance.gameData.gameCode002 = true;
+        }
+        else if (allowedPage == 3)
+        {
+            GM.Instance.gameData.gameCode007 = true;
+        }
+        else if (allowedPage == 4)
+        {
+            GM.Instance.gameData.gameCode009 = true;
+        }
         Debug.Log("쓰기 실행");
         leftText.text = "";
         rightText.text = "";

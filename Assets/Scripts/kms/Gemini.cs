@@ -105,6 +105,7 @@ public class Gemini : MonoBehaviour
                         string answer = candidate.content.parts[0].text;
                         Debug.Log("Gemini 응답: " + answer);
                         GM.Instance.animateText.lines = ConvertStringToList(answer);
+                        GM.Instance.inputSubmitManager.gameCode = GM.Instance.animateText.lines[^1];
                         GM.Instance.animateText.gameObject.SetActive(true);
                     }
                     else

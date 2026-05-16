@@ -23,6 +23,11 @@ public class GM : MonoBehaviour
     public Transform defaultPoint1;
     public Transform defaultPoint2;
     public Clock clock;
+    public Move playerMove;
+    public Notification notice;
+    public InputSubmitManager inputSubmitManager;
+    public MyDiary myDiary;
+    public GameData gameData;
     public List<string> npcInfo = new List<string>
     {
 //1번 npc        
