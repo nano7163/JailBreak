@@ -17,7 +17,7 @@ public class MyDiary : MonoBehaviour
     [SerializeField] private GameObject diaryLeftWriter;
     [SerializeField] private GameObject diaryRightWriter;
     private int currentPage = 1;
-    private int maxPage = 5;
+    private int maxPage = 6;
     [SerializeField] private int allowedPage = 1;
     private int writtenPage = 1;
     // 왼쪽 페이지 내용들

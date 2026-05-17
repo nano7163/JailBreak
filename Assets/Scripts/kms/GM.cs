@@ -2,6 +2,7 @@ using System;
 using BitWave_Labs.AnimatedTextReveal;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GM : MonoBehaviour
@@ -28,6 +29,8 @@ public class GM : MonoBehaviour
     public InputSubmitManager inputSubmitManager;
     public MyDiary myDiary;
     public GameData gameData;
+    public SaveLoad saveLoad;
+    public BreakableWall bw;
     private void Awake()
     {
         // 싱글톤 초기화
@@ -56,7 +59,17 @@ public class GM : MonoBehaviour
             Debug.LogError("prompt 파일이 없습니다! 파일을 생성하세요.");
         }
     }
-
+    public void NewGame()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+        Invoke("UnTitle", 0.5f);
+        //saveLoad.UnTitle();
+    }
+    public void UnTitle()
+    {
+        saveLoad.UnTitle();
+    }
     public void TeleportPlayer()
     {
         player.transform.position = tpPoint.position;

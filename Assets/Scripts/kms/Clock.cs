@@ -25,6 +25,7 @@ public class Clock : MonoBehaviour
         dayOrNightStatus = 0;
         dayOrNightImage.sprite = day;
         black.SetActive(false);
+        
     }
     void Update()
     {

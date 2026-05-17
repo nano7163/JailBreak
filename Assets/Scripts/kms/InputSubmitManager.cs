@@ -222,6 +222,10 @@ nPCInfomation
         }else if(gameCode == "019")
         {
             GM.Instance.gameData.gameCode019 = true;
+        }else if (gameCode == "020")
+        {
+            GM.Instance.gameData.gameCode020 = true;//일기장 챙김
+            GM.Instance.bag.items[10 - 1].GetComponent<Items>().SetIsItemAcquired(true);
         }
 
         GameCodeClear();//일 끝났으면 초기화

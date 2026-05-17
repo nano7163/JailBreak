@@ -20,6 +20,7 @@ public class ItemDetecter : MonoBehaviour
             GM.Instance.notice.SetActiveNotice(true);
             collision.gameObject.SetActive(false);
             GM.Instance.bag.items[11 - 1].GetComponent<Items>().SetIsItemAcquired(true);
+            GM.Instance.gameData.item11 = true;
         }
         else if (collision.name == "11-1")
         {
@@ -61,12 +62,20 @@ public class ItemDetecter : MonoBehaviour
                 GM.Instance.notice.SetActiveNotice(true);
                 GM.Instance.bag.items[9 - 1].GetComponent<Items>().SetIsItemAcquired(true);
                 GM.Instance.myDiary.SetIntAllowedPage(6);
+                GM.Instance.clock.PauseClock();
+                book.SetActive(true);
+                GM.Instance.playerMove.enabled = false;
+                GM.Instance.bag.items[9 - 1].GetComponent<Items>().SetIsItemAcquired(true);
+                GM.Instance.notice.SetActiveNotice(true);
             }
-            GM.Instance.clock.PauseClock();
-            book.SetActive(true);
-            GM.Instance.playerMove.enabled = false;
-            GM.Instance.bag.items[9 - 1].GetComponent<Items>().SetIsItemAcquired(true);
-            GM.Instance.notice.SetActiveNotice(true);
+            else if (GM.Instance.gameData.gameCode018)
+            {
+                GM.Instance.gameData.gameCode020 = true;
+                GM.Instance.notice.SetActiveNotice(true);
+                GM.Instance.bag.items[10 - 1].GetComponent<Items>().SetIsItemAcquired(true);
+                collision.gameObject.SetActive(false);
+            }
+
         }
         else if (collision.name == "Jailer")
         {//교도관 허리춤
@@ -75,6 +84,13 @@ public class ItemDetecter : MonoBehaviour
                 GM.Instance.gameData.gameCode011 = true;
                 //본뜨기 성공
                 JustTextPrint("찰흙에 몰래 열쇠들을 찍어냈다. 들키지 않았다.");
+            }
+        }
+        else if (collision.name == "Broker")
+        {//교도관 허리춤
+            if (GM.Instance.bag.items[10 - 1].GetComponent<Items>().GetIsItemAcquired())
+            {
+                GM.Instance.saveLoad.Ending1();
             }
         }
     }

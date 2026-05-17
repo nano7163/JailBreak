@@ -4,14 +4,26 @@ using UnityEngine;
 public class BreakableWall : MonoBehaviour
 {
     [SerializeField] public TMP_Text durabilityText;
-    public int durability = 5000;
+    public int durability = 500;
 
     void Start()
     {
-        durability = 5000;
-        if (durability == 5000)
+        durability = 500;
+        if (durability == 500)
         {
             durabilityText.text = "";
+        }
+    }
+    public void SetDurability(int d)
+    {
+        durability = d;
+        if (durability == 500)
+        {
+            durabilityText.text = "";
+        }
+        else
+        {
+            countDownDurability();
         }
     }
     public void countDownDurability()
@@ -24,9 +36,11 @@ public class BreakableWall : MonoBehaviour
         {
             // 엔딩2
             Debug.Log("엔딩 2- 노가다 탈출");
+            GM.Instance.saveLoad.Ending2();
         }
         Debug.Log(durability);
-        durabilityText.text = ((durability / 5000f) * 100).ToString() + "%";
+        GM.Instance.gameData.du = durability;
+        durabilityText.text = ((durability / 500f) * 100).ToString() + "%";
     }
 
 

@@ -23,5 +23,8 @@ public class GameData
     public bool gameCode017 = false;
     public bool gameCode018 = false;
     public bool gameCode019 = false;
-    public List<string> dialogueHistory = new List<string>();
+    public bool gameCode020 = false;
+    //public List<string> dialogueHistory = new List<string>();
+    public int du = 500;
+    public bool item11 = false;
 }
