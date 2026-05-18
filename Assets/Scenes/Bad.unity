@@ -531,7 +531,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jail Break
+  m_text: " Bad Ending\n\n\uBC1C\uAC01\uB428"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d0412996d77b7648901f118881b2fdf, type: 2}
   m_sharedMaterial: {fileID: -4271826089898303598, guid: 3d0412996d77b7648901f118881b2fdf, type: 2}
@@ -805,6 +805,7 @@ MonoBehaviour:
     gameCode017: 0
     gameCode018: 0
     gameCode019: 0
+    gameCode020: 0
     du: 500
     item11: 0
 --- !u!1 &1060707834

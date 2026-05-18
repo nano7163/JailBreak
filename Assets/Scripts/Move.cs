@@ -290,7 +290,7 @@ public class Move : MonoBehaviour
         else if (id == 11)
         {
             GM.Instance.SetMoveMonsterStartCenter();
-            transform.position = new Vector3(29.5f, 13f, transform.position.z);
+            transform.position = new Vector3(29f, 13f, transform.position.z);
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero;
@@ -298,7 +298,7 @@ public class Move : MonoBehaviour
         }
         else if (id == 12)
         {
-            transform.position = new Vector3(34.5f, 13f, transform.position.z);
+            transform.position = new Vector3(44f, 13f, transform.position.z);
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero;

@@ -443,6 +443,7 @@ MonoBehaviour:
     gameCode017: 0
     gameCode018: 0
     gameCode019: 0
+    gameCode020: 0
     du: 500
     item11: 0
 --- !u!4 &160824787
@@ -732,7 +733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &800381816
@@ -763,7 +764,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ending 2\\n\uB178\uAC00\uB2E4\uB85C \uD0C8\uCD9C \uC131\uACF5"
+  m_text: "Ending 2\\n\\n\uD53C\uB098\uB294 \uB178\uB825\uC73C\uB85C \uD0C8\uCD9C
+    \uC131\uACF5\uD588\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d0412996d77b7648901f118881b2fdf, type: 2}
   m_sharedMaterial: {fileID: -4271826089898303598, guid: 3d0412996d77b7648901f118881b2fdf, type: 2}
